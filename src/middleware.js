@@ -7,7 +7,7 @@ export const defaultHeaders = {
 
 export function middleware({ templates, match, headers = defaultHeaders, minify = true, debug = false }) {
   return async function ETSMiddleware(req, res, next) {
-    const { templateKey, templateData } = match(req, res) || {}
+    const { templateKey, templateData } = await match(req, res) || {}
 
     if (_.isNil(templateKey)) {
       console.warn('[ETS] No templateKey provided!')
