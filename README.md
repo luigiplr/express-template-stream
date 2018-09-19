@@ -1,10 +1,11 @@
-express-template-stream
+express-template-stream [README IS WIP]
 ============
 [![NPM version](https://badge.fury.io/js/express-template-stream.svg)](http://badge.fury.io/js/express-template-stream)
 [![Dependency Status](https://img.shields.io/david/luigiplr/express-template-stream.svg)](https://david-dm.org/luigiplr/express-template-stream)
 [![npm](https://img.shields.io/npm/dm/express-template-stream.svg?maxAge=2592000)]()
 
 Express middleware that allows streaming of template literals w/ interpolation of Node.JS streams, Arrays and Promises.
+
 
 ## Installation
 ```bash
