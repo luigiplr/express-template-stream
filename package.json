@@ -1,5 +1,17 @@
 {
+  "name": "express-template-stream",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Luigi Poole <luigipoole@outlook.com>",
+  "license": "MIT",
+  "description": "",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "async": "^2.6.1",
     "concat-stream": "^1.6.2",
     "lodash": "^4.17.11",
@@ -8,14 +20,14 @@
     "rxjs": "^6.3.2",
     "stream-template": "^0.0.10"
   },
-  "name": "express-template-stream",
-  "version": "1.0.0",
-  "main": "lib/index.js",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Luigi Poole <luigipoole@outlook.com>",
-  "license": "MIT",
-  "description": ""
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "cross-env": "^5.2.0"
+  }
 }
