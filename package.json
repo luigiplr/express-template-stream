@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "async": "^2.6.1",
+    "concat-stream": "^1.6.2",
+    "lodash": "^4.17.11",
+    "minify-html-stream": "^0.3.1",
+    "readable-stream": "^3.0.3",
+    "rxjs": "^6.3.2",
+    "stream-template": "^0.0.10"
+  },
+  "name": "express-template-stream",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luigi Poole <luigipoole@outlook.com>",
+  "license": "MIT",
+  "description": ""
+}
