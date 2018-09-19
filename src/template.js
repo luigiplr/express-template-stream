@@ -7,7 +7,7 @@ import { ReplaySubject } from 'rxjs'
 import async from 'async'
 import url from 'url'
 
-export default class RenderTemplate {
+export default class Template {
   constructor(req, res, opts) {
     this.headers$ = new ReplaySubject()
     this.html = new stream.PassThrough()
@@ -39,7 +39,7 @@ export default class RenderTemplate {
     })
   }
 
-  Template = ST
+  ST = ST
 
   body() {
     return (
