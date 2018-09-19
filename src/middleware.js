@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { Minifier } from 'minify-html-stream'
 
-const defaultHeaders = {
+export const defaultHeaders = {
   'Content-Type': 'text/html'
 }
 
@@ -18,8 +18,10 @@ export default function middleware({ templates, match, headers = defaultHeaders,
       return next()
     }
 
-    for (let key in defaultHeaders) {
-      res.header(key, defaultHeaders[key])
+    const _headers = _.isFunction(headers) ? headers(req, res) : headers
+
+    for (let key in _headers) {
+      res.header(key, _headers[key])
     }
 
     const Template = new templates[templateKey](req, res)

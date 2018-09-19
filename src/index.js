@@ -1,2 +1,2 @@
-export middleware from './middleware'
+export * from './middleware'
 export StreamTemplate from './template'
