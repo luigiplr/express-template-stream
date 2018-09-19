@@ -5,11 +5,12 @@ export const defaultHeaders = {
   'Content-Type': 'text/html'
 }
 
-export default function middleware({ templates, match, headers = defaultHeaders, minify = true }) {
-  return (req, res, next) => {
-    const templateKey = match(req, res)
+export function middleware({ templates, match, headers = defaultHeaders, minify = true, debug = false }) {
+  return async function ETSMiddleware(req, res, next) {
+    const { templateKey, templateData } = match(req, res) || {}
 
     if (_.isNil(templateKey)) {
+      console.warn('[ETS] No templateKey provided!')
       return next()
     }
 
@@ -24,13 +25,18 @@ export default function middleware({ templates, match, headers = defaultHeaders,
       res.header(key, _headers[key])
     }
 
-    const Template = new templates[templateKey](req, res)
+    const Template = new templates[templateKey](req, res, {
+      debug,
+      data: templateData
+    })
 
-    renderTemplate.headers$.subscribe(([key, value]) => {
+    await Template._init()
+
+    Template.headers$.subscribe(([key, value]) => {
       res.header(key, value)
     })
 
-    let html = renderTemplate.html
+    let html = Template.html
 
     if (minify) {
       html = html.pipe(new Minifier())

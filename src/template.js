@@ -14,16 +14,21 @@ export default class Template {
     this._streamHTML = false
     this._htmlStreamStarted = false
 
-    this._opts = opts
+    this.data = opts.data
+    this.debug = opts.debug
     this._req = req
     this._res = res
 
-    if (_.isFunction(this.shouldStream) && this.shouldStream(req, res)) {
+    if (_.isFunction(this.streamable) && this.streamable(req, res)) {
       this._streamHTML = true
     }
+  }
 
+  ST = ST
+
+  async _init() {
     if (_.isFunction(this.init)) {
-      this.init(req, res)
+      await this.init.bind(this)()
     }
 
     this._setupHeaders()
@@ -38,8 +43,6 @@ export default class Template {
       }
     })
   }
-
-  ST = ST
 
   body() {
     return (
@@ -119,7 +122,7 @@ export default class Template {
   }
 
   _headers() {
-    if (this._opts.debug) {
+    if (this.debug) {
       return [
         ['x-ets-streamed', +this._streamHTML]
       ]
