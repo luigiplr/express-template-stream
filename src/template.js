@@ -6,8 +6,6 @@ import concatStream from 'concat-stream'
 import { ReplaySubject } from 'rxjs'
 import async from 'async'
 import url from 'url'
-import eos from 'end-of-stream'
-
 
 export default class Template {
   constructor(req, res, opts) {
@@ -134,7 +132,7 @@ export default class Template {
   }
 
   _startHTMLStream = htmlTag => {
-    this._renderStream = ST`
+    const renderStream = ST`
       <!DOCTYPE html>
       ${htmlTag}
         ${this.head()}
@@ -142,10 +140,14 @@ export default class Template {
       </html>
     `
 
-    eos(
-      htmlStream,
-      err => err && this._onError(err)
-    )
+    renderStream.once('finish', () => {
+      renderStream.removeAllListeners()
+    })
+
+    renderStream.once('error', err => {
+      renderStream.removeAllListeners()
+      this._onError(err)
+    })
 
     if (this._streamHTML) {
       this._htmlStreamStarted = true
